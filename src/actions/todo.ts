@@ -22,7 +22,7 @@ export async function addTodo(path: string, formData: FormData) {
 
   const imageUrls = imageResponse.map((image) => {
     if (image.error) throw image.error
-    return image.data?.url
+    return { key: image.data.key, url: image.data.url }
   })
 
   await db.insert(todo).values({ text: todoParsed.text, images: imageUrls })
@@ -47,6 +47,18 @@ export async function deleteTodo(path: string, formData: FormData) {
   const { id } = schema.parse({
     id: Number(formData.get('id')),
   })
+
+  const todos = await db
+    .select({ images: todo.images })
+    .from(todo)
+    .where(eq(todo.id, id))
+
+  if (!todos[0]) throw new Error('Todo not found')
+
+  const imageKeys = (todos[0].images as any[])?.map((img) => img.key)
+
+  const imageResponse = await utApi.deleteFiles(imageKeys)
+  if (!imageResponse.success) throw new Error("Couldn't delete images")
 
   await db.delete(todo).where(eq(todo.id, id))
 

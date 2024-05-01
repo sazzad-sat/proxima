@@ -86,11 +86,11 @@ function TodoImages(props: Props) {
     <div className="flex gap-4">
       {props.images.map((image) => (
         <div
-          key={image}
+          key={image.key}
           className="rounded-lg bg-gray-300 shadow shadow-black/25"
         >
           <Image
-            src={image}
+            src={image.url}
             alt="image"
             className="object-contain size-24 rounded-lg"
             width={100}
@@ -147,6 +147,7 @@ function DeleteTodo({ id }: Props) {
     <form action={deleteTodo.bind(null, '/')}>
       <input type="hidden" name="id" value={id} />
       <Button
+        type="submit"
         className={'h-7 text-red-500 hover:text-red-600'}
         size={'sm'}
         variant={'outline'}
