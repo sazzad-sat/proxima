@@ -56,7 +56,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={pending}
         aria-disabled={pending}
       >
-        {pending ? <Loader2 className="animate-spin" /> : props.children}
+        {pending ? (
+          <Loader2
+            className="animate-spin"
+            size={size === 'sm' ? 16 : undefined}
+          />
+        ) : (
+          props.children
+        )}
       </Comp>
     )
   }
