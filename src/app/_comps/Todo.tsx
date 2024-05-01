@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { todo } from '@/db/schema'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 type Props = typeof todo.$inferSelect
@@ -41,8 +42,10 @@ export default function Todo(props: Props) {
           </div>
         </AccordionTrigger>
 
-        <AccordionContent>
+        <AccordionContent className="space-y-4">
           <TodoOptions {...props} />
+
+          <TodoImages {...props} />
         </AccordionContent>
       </div>
     </AccordionItem>
@@ -72,6 +75,29 @@ function TodoOptions(props: Props) {
       <UpdateStatus {...props} />
 
       <DeleteTodo {...props} />
+    </div>
+  )
+}
+
+function TodoImages(props: Props) {
+  if (!(props.images instanceof Array)) return
+
+  return (
+    <div className="flex gap-4">
+      {props.images.map((image) => (
+        <div
+          key={image}
+          className="rounded-lg bg-gray-300 shadow shadow-black/25"
+        >
+          <Image
+            src={image}
+            alt="image"
+            className="object-contain size-24 rounded-lg"
+            width={100}
+            height={100}
+          />
+        </div>
+      ))}
     </div>
   )
 }
