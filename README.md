@@ -16,3 +16,11 @@
 1. Add task
 2. Update Status of task
 3. Delete task
+
+## v0.2.0 (May 1, 2024)
+
+### Features
+
+1. Attach Image with Tasks
+2. Maximum 5 images with one task
+3. Add-Task-Form as a dialog
