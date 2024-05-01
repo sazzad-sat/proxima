@@ -1,4 +1,10 @@
-import { pgEnum, pgTableCreator, serial, text } from 'drizzle-orm/pg-core'
+import {
+  jsonb,
+  pgEnum,
+  pgTableCreator,
+  serial,
+  text,
+} from 'drizzle-orm/pg-core'
 
 const createTable = pgTableCreator((name) => `proxima_${name}`)
 
@@ -12,4 +18,5 @@ export const todo = createTable('todo', {
   id: serial('id').primaryKey(),
   text: text('text').notNull(),
   status: statusEnum('status').default('pending').notNull(),
+  images: jsonb('images').default([]).notNull(),
 })

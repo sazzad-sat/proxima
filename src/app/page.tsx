@@ -11,6 +11,7 @@ export default async function Home() {
       id: todo.id,
       text: todo.text,
       status: todo.status,
+      images: todo.images,
     })
     .from(todo)
     .orderBy(asc(todo.id))

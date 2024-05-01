@@ -44,7 +44,10 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    { className, variant, size, asChild = false, type = 'button', ...props },
+    ref
+  ) => {
     const { pending } = useFormStatus()
 
     const Comp = asChild ? Slot : 'button'
@@ -55,8 +58,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         disabled={pending}
         aria-disabled={pending}
+        type={type}
       >
-        {pending ? (
+        {pending && type === 'submit' ? (
           <Loader2
             className="animate-spin"
             size={size === 'sm' ? 16 : undefined}
