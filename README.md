@@ -24,3 +24,11 @@
 1. Attach Image with Tasks
 2. Maximum 5 images with one task
 3. Add-Task-Form as a dialog
+
+## v0.3.0 (May 2, 2024)
+
+### Features
+
+1. Authentication
+2. Sidebar with Account management
+3. Authorized actions on Tasks
