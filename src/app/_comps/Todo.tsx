@@ -13,7 +13,12 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-type Props = typeof todo.$inferSelect
+type Props = {
+  id: number
+  text: string
+  status: StatusEnum
+  images: { key: string; url: string }[]
+}
 
 type StatusEnum = typeof todo.$inferSelect.status
 
