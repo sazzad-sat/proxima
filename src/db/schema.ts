@@ -19,4 +19,5 @@ export const todo = createTable('todo', {
   text: text('text').notNull(),
   status: statusEnum('status').default('pending').notNull(),
   images: jsonb('images').default([]).notNull(),
+  creatorId: text('creatorId').notNull(),
 })
