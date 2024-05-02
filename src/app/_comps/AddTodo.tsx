@@ -68,7 +68,13 @@ export function AddTodoDialog() {
       }}
       className="pt-4 flex flex-col gap-4"
     >
-      <Input name="text" type="text" placeholder="Task name" autoFocus />
+      <Input
+        name="text"
+        type="text"
+        placeholder="Task name"
+        autoFocus
+        autoComplete="off"
+      />
 
       <div className="flex justify-between">
         <input
