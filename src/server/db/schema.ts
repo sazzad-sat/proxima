@@ -1,4 +1,5 @@
 import {
+  integer,
   jsonb,
   pgEnum,
   pgTableCreator,
@@ -7,6 +8,12 @@ import {
 } from 'drizzle-orm/pg-core'
 
 const createTable = pgTableCreator((name) => `proxima_${name}`)
+
+export const project = createTable('project', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  ownerId: text('ownerId').notNull(),
+})
 
 export const statusEnum = pgEnum('proxima_status', [
   'pending',
@@ -20,4 +27,7 @@ export const todo = createTable('todo', {
   status: statusEnum('status').default('pending').notNull(),
   images: jsonb('images').default([]).notNull(),
   creatorId: text('creatorId').notNull(),
+  projectId: integer('projectId').references(() => project.id, {
+    onDelete: 'cascade',
+  }),
 })
