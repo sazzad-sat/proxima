@@ -1,7 +1,7 @@
 'use server'
 
-import db from '@/db'
-import { todo } from '@/db/schema'
+import db from '@/server/db'
+import { todo } from '@/server/db/schema'
 import utApi from '@/server/uploadthing'
 import { auth } from '@clerk/nextjs/server'
 import { eq } from 'drizzle-orm'

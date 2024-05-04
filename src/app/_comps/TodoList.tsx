@@ -1,5 +1,5 @@
-import db from '@/db'
-import { todo } from '@/db/schema'
+import db from '@/server/db'
+import { todo } from '@/server/db/schema'
 import { asc, eq } from 'drizzle-orm'
 import { auth } from '@clerk/nextjs/server'
 import { Accordion } from '@/components/ui/accordion'
