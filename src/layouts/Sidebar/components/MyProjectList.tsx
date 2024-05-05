@@ -1,21 +1,18 @@
-import { Hash } from 'lucide-react'
-import db from '@/server/db'
-import { project } from '@/server/db/schema'
-import { asc, eq } from 'drizzle-orm'
-import { auth } from '@clerk/nextjs/server'
-import Project from './Project'
+'use client'
+
 import AddProject from './AddProject'
+import { Hash } from 'lucide-react'
+import Project from './Project'
+import { usePathname, useRouter } from 'next/navigation'
+import Route from '@/configs/routes'
 
-export default async function MyProjectList() {
-  const { userId } = auth()
-
-  if (!userId) throw new Error('User not authenticated')
-
-  const projects = await db
-    .select()
-    .from(project)
-    .where(eq(project.ownerId, userId))
-    .orderBy(asc(project.id))
+export default function MyProjectList({
+  projects,
+}: {
+  projects: { id: number; name: string }[]
+}) {
+  const path = usePathname()
+  const router = useRouter()
 
   return (
     <div className="flex flex-col">
@@ -25,12 +22,14 @@ export default async function MyProjectList() {
         <AddProject />
       </div>
 
-      {projects.map((project) => (
+      {projects.map(({ id, name }) => (
         <Project
-          key={project.id}
-          id={project.id}
-          name={project.name}
+          key={id}
+          id={id}
+          name={name}
           icon={<Hash size={16} />}
+          active={path === Route.Projects + '/' + id}
+          onClick={() => router.push(Route.Projects + '/' + id)}
         />
       ))}
     </div>

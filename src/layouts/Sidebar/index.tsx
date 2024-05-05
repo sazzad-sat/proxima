@@ -1,10 +1,13 @@
 import { UserButton, SignedIn } from '@clerk/nextjs'
 import Logo from '@/components/brand/Logo'
-import { Inbox } from 'lucide-react'
-import Project from './components/Project'
 import MyProjectList from './components/MyProjectList'
+import InboxProject from './components/InboxProject'
+import db from '@/server/db'
+import { project } from '@/server/db/schema'
+import { asc, eq } from 'drizzle-orm'
+import { auth } from '@clerk/nextjs/server'
 
-export default async function Sidebar() {
+export default function Sidebar() {
   return (
     <aside className="max-w-sm w-screen bg-neutral-200">
       <SiderbarHeader />
@@ -35,12 +38,22 @@ function SiderbarHeader() {
   )
 }
 
-function SidebarContent() {
+async function SidebarContent() {
+  const { userId } = auth()
+
+  if (!userId) throw new Error('User not authenticated')
+
+  const projects = await db
+    .select()
+    .from(project)
+    .where(eq(project.ownerId, userId))
+    .orderBy(asc(project.id))
+
   return (
     <div className="px-4 flex flex-col gap-4">
-      <Project id={null} name="Inbox" icon={<Inbox size={16} />} />
+      <InboxProject />
 
-      <MyProjectList />
+      <MyProjectList projects={projects} />
     </div>
   )
 }
