@@ -32,3 +32,10 @@
 1. Authentication
 2. Sidebar with Account management
 3. Authorized actions on Tasks
+
+## v0.4.0 (May 5, 2024)
+
+### Features
+
+1. Organize tasks in Projects
+2. Tasks that doesn't belong to any projects lives in Inbox
