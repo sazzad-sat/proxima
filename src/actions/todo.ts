@@ -11,6 +11,7 @@ import { z } from 'zod'
 const addTodoSchema = z.object({
   text: z.string().min(1),
   images: z.array(z.any()).max(5),
+  projectId: z.coerce.number().optional(),
 })
 
 export async function addTodo(path: string, formData: FormData) {
@@ -21,6 +22,7 @@ export async function addTodo(path: string, formData: FormData) {
   const todoParsed = addTodoSchema.parse({
     text: formData.get('text'),
     images: formData.getAll('images'),
+    projectId: formData.get('projectId'),
   })
 
   const validImages = todoParsed.images.filter((image) => image.size !== 0)
@@ -37,6 +39,7 @@ export async function addTodo(path: string, formData: FormData) {
     text: todoParsed.text,
     images: imageUrls,
     creatorId: userId,
+    projectId: todoParsed.projectId,
   })
 
   if (path) revalidatePath(path)

@@ -1,11 +1,15 @@
 import db from '@/server/db'
 import { todo } from '@/server/db/schema'
-import { asc, eq } from 'drizzle-orm'
+import { and, asc, eq, isNull } from 'drizzle-orm'
 import { auth } from '@clerk/nextjs/server'
 import { Accordion } from '@/components/ui/accordion'
 import Todo from './Todo'
 
-export default async function TodoList() {
+export default async function TodoList({
+  projectId,
+}: {
+  projectId: number | null
+}) {
   const { userId } = auth()
 
   const todos = await db
@@ -16,7 +20,12 @@ export default async function TodoList() {
       images: todo.images,
     })
     .from(todo)
-    .where(eq(todo.creatorId, userId!))
+    .where(
+      and(
+        projectId ? eq(todo.projectId, projectId) : isNull(todo.projectId),
+        eq(todo.creatorId, userId!)
+      )
+    )
     .orderBy(asc(todo.id))
 
   return (

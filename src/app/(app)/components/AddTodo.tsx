@@ -13,7 +13,7 @@ import { Cross, Link, SendHorizonal, X } from 'lucide-react'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
 
-export default function AddTodo() {
+export default function AddTodo({ projectId }: { projectId: number | null }) {
   return (
     <Dialog>
       <DialogTrigger asChild className="w-full">
@@ -34,13 +34,13 @@ export default function AddTodo() {
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <AddTodoDialog />
+        <AddTodoDialog projectId={projectId} />
       </DialogContent>
     </Dialog>
   )
 }
 
-export function AddTodoDialog() {
+export function AddTodoDialog({ projectId }: { projectId: number | null }) {
   const form = useRef<HTMLFormElement>(null)
   const imgInput = useRef<HTMLInputElement>(null)
   const [files, setFiles] = useState<FileList | null>(null)
@@ -68,6 +68,8 @@ export function AddTodoDialog() {
       }}
       className="pt-4 flex flex-col gap-4"
     >
+      <Input type="hidden" name="projectId" value={projectId ?? undefined} />
+
       <Input
         name="text"
         type="text"
