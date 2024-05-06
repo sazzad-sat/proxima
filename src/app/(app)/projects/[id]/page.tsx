@@ -1,5 +1,5 @@
-import AddTodo from '../../components/AddTodo'
-import TodoList from '../../components/TodoList'
+import AddTodo from '../../_components/AddTodo'
+import TodoList from '../../_components/TodoList'
 
 export default async function Project({ params }: { params: { id: string } }) {
   if (isNaN(+params.id)) throw new Error('Invalid project id')
