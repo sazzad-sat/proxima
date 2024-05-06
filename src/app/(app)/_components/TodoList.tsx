@@ -28,6 +28,17 @@ export default async function TodoList({
     )
     .orderBy(asc(todo.id))
 
+  const noTodos = todos.length === 0
+
+  if (noTodos)
+    return (
+      <div className="w-full mt-4 p-4 bg-neutral-200 rounded-lg">
+        <p className="text-center text-neutral-400 text-sm">
+          No task on this project
+        </p>
+      </div>
+    )
+
   return (
     <Accordion type="single" collapsible className="space-y-2">
       {todos.map((todo) => (
