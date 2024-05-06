@@ -6,6 +6,7 @@ import db from '@/server/db'
 import { project } from '@/server/db/schema'
 import { asc, eq } from 'drizzle-orm'
 import { auth } from '@clerk/nextjs/server'
+import Route from '@/configs/routes'
 
 export default function Sidebar() {
   return (
@@ -24,6 +25,7 @@ function SiderbarHeader() {
 
       <SignedIn>
         <UserButton
+          afterSwitchSessionUrl={Route.Inbox}
           appearance={{
             elements: {
               userButtonAvatarBox: {
