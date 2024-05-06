@@ -18,8 +18,10 @@ export default async function Inbox() {
 
 function PageHeader() {
   return (
-    <h1 className="text-3xl font-bold my-4">
-      <InboxIcon className="inline mr-2 mb-0.5" size={28} /> Inbox
-    </h1>
+    <div className="flex justify-between items-center my-4 mb-8 pb-2 border-b">
+      <h1 className="text-3xl font-bold">
+        <InboxIcon className="inline mr-2 mb-0.5" size={28} /> Inbox
+      </h1>
+    </div>
   )
 }

@@ -4,6 +4,8 @@ import TodoList from '../../_components/TodoList'
 import db from '@/server/db'
 import { project } from '@/server/db/schema'
 import { and, eq } from 'drizzle-orm'
+import { Button } from '@/components/ui/button'
+import { Users } from 'lucide-react'
 
 export default async function Project({ params }: { params: { id: string } }) {
   if (isNaN(+params.id)) throw new Error('Invalid project id')
@@ -45,5 +47,12 @@ function ProjectPageContainer({ children }: { children: React.ReactNode }) {
 }
 
 function PageHeader({ projectName }: { projectName: string }) {
-  return <h1 className="text-3xl font-bold my-4">{projectName}</h1>
+  return (
+    <div className="flex justify-between items-center my-4 mb-8 pb-2 border-b">
+      <h1 className="text-3xl font-bold">{projectName}</h1>
+      <Button className="gap-2 text-gray-600" variant={'ghost'}>
+        <Users size={20} /> Share
+      </Button>
+    </div>
+  )
 }
