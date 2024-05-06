@@ -2,7 +2,8 @@
 
 import { Inbox } from 'lucide-react'
 import Project from './Project'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import Route from '@/configs/routes'
 
 export default function InboxProject() {
