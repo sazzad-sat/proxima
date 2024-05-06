@@ -39,3 +39,12 @@
 
 1. Organize tasks in Projects
 2. Tasks that doesn't belong to any projects lives in Inbox
+
+## v0.4.1 (May 6, 2024)
+
+### Changes
+
+- Improvements on User experience
+- Show page loading indicator
+- Empty project list & task list messages
+- Show project not found message
