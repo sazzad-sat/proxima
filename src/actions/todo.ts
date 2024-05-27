@@ -11,7 +11,7 @@ import { z } from 'zod'
 const addTodoSchema = z.object({
   text: z.string().min(1),
   images: z.array(z.any()).max(5),
-  projectId: z.coerce.number().optional(),
+  projectId: z.coerce.number().nullable(),
 })
 
 export async function addTodo(path: string, formData: FormData) {

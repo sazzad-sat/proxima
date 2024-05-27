@@ -68,7 +68,9 @@ export function AddTodoDialog({ projectId }: { projectId: number | null }) {
       }}
       className="pt-4 flex flex-col gap-4"
     >
-      <Input type="hidden" name="projectId" value={projectId ?? undefined} />
+      {projectId && (
+        <Input type="hidden" name="projectId" value={projectId ?? ''} />
+      )}
 
       <Input
         name="text"
